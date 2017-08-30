@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("rest/mars/")
@@ -18,11 +15,14 @@ public class MovimentarController {
     @Autowired
     MovimentarService srv;
 
-    @RequestMapping(method= RequestMethod.POST, path="/mover",  produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<String> mover(@RequestParam("comando") String comando) {
+    @RequestMapping(method= RequestMethod.POST, path="/mover",  produces = MediaType.TEXT_PLAIN_VALUE)
+    @ResponseBody
+    public String mover(@RequestParam("comando") String comando) {
         Posicao p = new Posicao();
         srv.initPosicaoSrv(p);
+        Posicao posicao = srv.mover(comando);
 
-        return new ResponseEntity(srv.mover(comando), HttpStatus.OK);
+        return posicao.getResultado();
+        //return new ResponseEntity(srv.mover(comando), HttpStatus.OK);
     }
 }
