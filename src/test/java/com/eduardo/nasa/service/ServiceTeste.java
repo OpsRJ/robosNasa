@@ -9,6 +9,7 @@ public class ServiceTeste {
 
     MovimentarService srv = new MovimentarService();
 
+    @Test
     public void moverSemErro() {
         Posicao p = new Posicao();
         srv.initPosicaoSrv(p);
