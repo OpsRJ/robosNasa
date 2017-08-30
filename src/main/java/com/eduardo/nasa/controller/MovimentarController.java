@@ -23,6 +23,5 @@ public class MovimentarController {
         Posicao posicao = srv.mover(comando);
 
         return posicao.getResultado();
-        //return new ResponseEntity(srv.mover(comando), HttpStatus.OK);
     }
 }
